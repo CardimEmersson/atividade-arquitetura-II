@@ -1,0 +1,43 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: irrigacao-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: central-gateway
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - irrigacao-gateway
+  http:
+  - match:
+    - uri:
+        exact: /irrigacao
+    - uri:
+        exact: /criar-irrigacao
+    route:
+    - destination:
+        host: irrigacao
+        port:
+          number: 8181
+  - match:
+    - uri: 
+        exact: /ligar-irrigacao
+    route:
+    - destination:
+        host: central-irrigacao
+        port:
+          number: 8282

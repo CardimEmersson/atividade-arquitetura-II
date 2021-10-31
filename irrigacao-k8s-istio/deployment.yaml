@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: central-irrigacao
+  labels:
+    app: central-irrigacao
+    service: central-irrigacao
+spec:
+  ports:
+  - port: 8282
+    name: http
+  selector:
+    app: central-irrigacao
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: central-irrigacao-v1
+  labels:
+    app: central-irrigacao
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: central-irrigacao
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: central-irrigacao
+        version: v1
+    spec:
+      containers:
+      - name: central-irrigacao
+        image: cardimemersson/central_irrigacao:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8282
+        securityContext:
+          runAsUser: 1000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: irrigacao
+  labels:
+    app: irrigacao
+    service: irrigacao
+spec:
+  ports:
+  - port: 8181
+    name: http
+  selector:
+    app: irrigacao
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: irrigacao-v1
+  labels:
+    app: irrigacao
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: irrigacao
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: irrigacao
+        version: v1
+    spec:
+      containers:
+      - name: irrigacao
+        image: cardimemersson/irrigacao:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8181
+        securityContext:
+          runAsUser: 1000
+---
