@@ -16,7 +16,7 @@ Tecnologias utilizadas:
    * Hystrix Netflix
 <!--te-->
 
-## EXECUÇÃO DO DOCKER
+## EXECUÇÃO DO PROJETO
 ```bash
 # Para executar os comandos abaixo é necessário ter o Maven instalado
 # Entre nas pastas 'central-irrigacao' e 'irrigacao' e execute os comandos para executar os servidores
