@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="sistema-irrigacao">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/central-irrigacao.zip!/" />
+      <root url="jar://$PROJECT_DIR$/irrigacao.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
